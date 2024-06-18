@@ -4,7 +4,7 @@ import random
 import pygame as pg
 
 
-WIDTH, HEIGHT = 1600, 900
+WIDTH, HEIGHT = 1000, 700
 DELTA = {
     pg.K_UP: (0, -5),
     pg.K_DOWN: (0, +5),
