@@ -15,9 +15,9 @@ os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
 
 def init_kk_imgs():
-    kk_img0 = pg.transform.rotozoom(pg.image.load("fig/3.png"), 0, 2.0)
-    kk_img2 = pg.transform.flip(kk_img0, True, False)
-    kk_img3 = pg.transform.rotozoom(kk_img0, 0, 1.0)
+    kk_img0 = pg.transform.rotozoom(pg.image.load("fig/3.png"), 0, 2.0)#普通のこうかとん
+    kk_img2 = pg.transform.flip(kk_img0, True, False)#逆向きのこうかとん
+    kk_img3 = pg.transform.rotozoom(kk_img0, 0, 1.0)#それぞれの向きに合わせて角度を変更
     kk_img4 = pg.transform.rotozoom(kk_img0, 315, 1.0)
     kk_img5 = pg.transform.rotozoom(kk_img0, 45, 1.0)
     kk_img6 = pg.transform.rotozoom(kk_img2, 90, 1.0)
@@ -86,7 +86,7 @@ def main():
             kk_rct.move_ip(-sum_mv[0], -sum_mv[1])
 
         kk_img = kk_imgs[tuple(sum_mv)]
-        
+
         screen.blit(kk_img, kk_rct)
         bb_rct.move_ip(vx, vy)
         yoko, tate = check_bound(bb_rct)
