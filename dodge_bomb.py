@@ -11,6 +11,29 @@ DELTA = {
     pg.K_LEFT: (-5, 0),
     pg.K_RIGHT: (+5, 0)
 }
+
+def init_kk_imgs():
+    kk_img0 = pg.transform.rotozoom(pg.image.load("fig/3.png"), 0, 2.0)
+    kk_img2 = pg.transform.flip(kk_img0, True, False)
+    kk_img3 = pg.transform.rotozoom(kk_img0, 0, 1.0)
+    kk_img4 = pg.transform.rotozoom(kk_img0, 315, 1.0)
+    kk_img5 = pg.transform.rotozoom(kk_img0, 45, 1.0)
+    kk_img6 = pg.transform.rotozoom(kk_img2, 90, 1.0)
+    kk_img7 = pg.transform.rotozoom(kk_img2, 270, 1.0)
+    kk_img8 = pg.transform.rotozoom(kk_img2, 315, 1.0)
+    kk_img9 = pg.transform.rotozoom(kk_img2, 45, 1.0)
+    return {
+        (0, 0): kk_img0,
+        (0, -5): kk_img6,
+        (0, +5): kk_img7,
+        (-5, 0): kk_img3,
+        (+5, 0): kk_img2,
+        (-5, -5): kk_img4,
+        (+5, +5): kk_img8,
+        (+5, -5): kk_img9,
+        (-5, +5): kk_img5,
+    }
+
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
 def check_bound(rct: pg.Rect) -> tuple[bool, bool]:
@@ -32,6 +55,7 @@ def main():
     screen = pg.display.set_mode((WIDTH, HEIGHT))
     bg_img = pg.image.load("fig/pg_bg.jpg")    
     kk_img = pg.transform.rotozoom(pg.image.load("fig/3.png"), 0, 2.0)
+    kk_imgs = init_kk_imgs()
     kk_rct = kk_img.get_rect()
     kk_rct.center = 900, 400
     bb_img = pg.Surface((20, 20))  # 1辺が20の空のSurfaceを作る
@@ -59,6 +83,10 @@ def main():
         kk_rct.move_ip(sum_mv)
         if check_bound(kk_rct) != (True, True):
             kk_rct.move_ip(-sum_mv[0], -sum_mv[1])
+
+        kk_img = kk_imgs[tuple(sum_mv)]
+    
+        
         screen.blit(kk_img, kk_rct)
 
         bb_rct.move_ip(vx, vy)
