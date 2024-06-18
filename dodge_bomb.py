@@ -11,6 +11,8 @@ DELTA = {
     pg.K_LEFT: (-5, 0),
     pg.K_RIGHT: (+5, 0)
 }
+os.chdir(os.path.dirname(os.path.abspath(__file__)))
+
 
 def init_kk_imgs():
     kk_img0 = pg.transform.rotozoom(pg.image.load("fig/3.png"), 0, 2.0)
@@ -34,7 +36,6 @@ def init_kk_imgs():
         (-5, +5): kk_img5,
     }
 
-os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
 def check_bound(rct: pg.Rect) -> tuple[bool, bool]:
     """
@@ -85,10 +86,8 @@ def main():
             kk_rct.move_ip(-sum_mv[0], -sum_mv[1])
 
         kk_img = kk_imgs[tuple(sum_mv)]
-    
         
         screen.blit(kk_img, kk_rct)
-
         bb_rct.move_ip(vx, vy)
         yoko, tate = check_bound(bb_rct)
         if not yoko:  # 横方向にはみ出たら
